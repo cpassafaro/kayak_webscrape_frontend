@@ -8,7 +8,7 @@ export default class Model extends BaseModel {
   }
 
   // Implement a default request method
-  request(config) {
-    return this.$http.request(config)
+  request() {
+    return this.$http.request()
   }
 }

@@ -1,44 +1,45 @@
 <template>
-  <v-container fluid fill-height class="container-main">
-    <v-layout justify-center align-center column>
-      <v-row>
-        <v-col justify-center align-center class="container-col">
-          <v-row class="row-header">Global Whitewater Kayak Shop</v-row>
-          <v-row class="row-subtext">Click to enter </v-row>
-        </v-col>
-      </v-row>
-    </v-layout>
-  </v-container>
+  <v-layout class="rounded rounded-md">
+    <v-app-bar color="surface-variant" title="WhiteWater Kayak Deals"></v-app-bar>
+
+    <v-carousel 
+      cycle
+      height="400"
+      hide-delimiters
+      :show-arrows="false"
+    >
+      <v-carousel-item
+        v-for="(item,i) in whitewaterImages"
+        :key="i"
+        :src="item.url"
+        cover
+      ></v-carousel-item>
+    </v-carousel>
+  </v-layout>
 </template>
 
 <script>
 export default {
+  props: {},
   name: "WelcomePage",
+  components: {},
+  data() {
+    return {
+      whitewaterImages: [
+        {
+          url: 'https://www.outdoorjournal.com/wp-content/uploads/19221884_10155153400712559_2716722644710697167_o-3.jpg'
+        },
+        {
+          url: 'https://www.mkc.ca/wp-content/uploads/2022/06/nouria-nouman-kayaking-david-arnaud-red-bull-content-pool-scaled-1.jpeg'
+        },
+        {
+          url: 'https://cdn.outsideonline.com/wp-content/uploads/2020/04/09/white-water-deaths_h.jpg'
+        },
+      ],
+    }
+  }
 };
 </script>
 <style scoped>
-/* .container-main {
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-  } */
-.v-row {
-  color: black;
-  justify-content: center;
-}
-.v-col {
-  margin-top: 15%;
-  background-color: white;
-  width: 100%;
-}
-.row-header {
-  font-size: 50px;
-  font-weight: bold;
-}
-.row-subtext {
-  text-decoration: underline;
-}
-.row-subtext:hover {
-  cursor: pointer;
-}
+
 </style>

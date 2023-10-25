@@ -12,3 +12,4 @@ npm run dev
 ### Dependencies
 Utilizing Vuetify and BEM CSS principles to style application
 Lodash for expediation
+Using Vue-api-query builder

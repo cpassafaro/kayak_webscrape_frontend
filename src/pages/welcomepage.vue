@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import Kayak from '../models/Kayak'
 export default {
   props: {},
   name: "WelcomePage",
@@ -36,6 +37,16 @@ export default {
           url: 'https://cdn.outsideonline.com/wp-content/uploads/2020/04/09/white-water-deaths_h.jpg'
         },
       ],
+      allKayaks: ''
+    }
+  },
+  mounted() {
+    console.log('mounted')
+    this.getAllKayaks()
+  },
+  methods: {
+    async getAllKayaks() {
+      this.allKayaks = await Kayak.get()
     }
   }
 };

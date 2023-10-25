@@ -15,6 +15,11 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import axios from 'axios'
+import { Model } from 'vue-api-query'
+
+// inject global axios instance as http client to Model
+Model.$http = axios
 
 // Plugins
 import { registerPlugins } from '@/plugins'

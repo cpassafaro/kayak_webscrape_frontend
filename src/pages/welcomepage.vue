@@ -1,29 +1,33 @@
 <template>
   <v-layout class="rounded rounded-md">
     <v-app-bar color="surface-variant" title="WhiteWater Kayak Deals"></v-app-bar>
-
-    <v-carousel 
-      cycle
-      height="400"
-      hide-delimiters
-      :show-arrows="false"
-    >
-      <v-carousel-item
-        v-for="(item,i) in whitewaterImages"
-        :key="i"
-        :src="item.url"
-        cover
-      ></v-carousel-item>
-    </v-carousel>
+    <v-row>
+      <v-carousel 
+        cycle
+        height="400"
+        hide-delimiters
+        :show-arrows="false"
+      >
+        <v-carousel-item
+          v-for="(item,i) in whitewaterImages"
+          :key="i"
+          :src="item.url"
+          cover
+        ></v-carousel-item>
+      </v-carousel>
+    </v-row>
+    <v-row>
+      <displayGrid></displayGrid>
+    </v-row>
   </v-layout>
 </template>
 
 <script>
-import Kayak from '../models/Kayak'
+import displayGrid from '../layouts/displayGrid.vue'
 export default {
   props: {},
   name: "WelcomePage",
-  components: {},
+  components: { displayGrid },
   data() {
     return {
       whitewaterImages: [
@@ -37,20 +41,7 @@ export default {
           url: 'https://cdn.outsideonline.com/wp-content/uploads/2020/04/09/white-water-deaths_h.jpg'
         },
       ],
-      allKayaks: ''
     }
   },
-  mounted() {
-    console.log('mounted')
-    this.getAllKayaks()
-  },
-  methods: {
-    async getAllKayaks() {
-      this.allKayaks = await Kayak.get()
-    }
-  }
 };
 </script>
-<style scoped>
-
-</style>

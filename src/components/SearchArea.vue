@@ -6,6 +6,7 @@
             bg-color="white"
             variant="outlined"
             label="Search Kayaks"
+            append-inner-icon="mdi-magnify"
         ></v-text-field>
     </v-container>
   </template>
@@ -13,15 +14,17 @@
   <script>
   export default {
     name: 'SearchArea',
-    props: {
-        value: {type: String, required: true, default: ''}
-    },
     data() {
-      return {}
+      return {
+        search: ''
+      }
     },
-    mounted() {
-        console.log('value ', this.value)
-    }
+    watch: {
+        search(newValue) {
+            this.search = newValue
+            this.$emit('search', this.search)
+        }
+    },
   }
   </script>
   <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,18 +1,37 @@
 <template>
     <v-container>
-        test
+        <SearchArea :value="searchTerm"></SearchArea>
     </v-container>
 </template>
 
 <script>
 import Kayak from '../models/Kayak'
+import SearchArea from '../components/SearchArea.vue'
 import _ from 'lodash'
 export default {
-    props: {},
     name: 'DisplayGrid',
+    components: { SearchArea },
+    props: {},
+    computed: {
+        filteredContent() {
+            if(this.searchTerm) {
+                console.log('search ', this.searchTerm)
+                return []
+            } else {
+                console.log('not searching ', this.allKayaks)
+                return this.allKayaks
+            }
+        },  
+    },
+    watch: {
+        searchTerm(newValue) {
+            console.log('search term ', newValue)
+        }
+    },
     data() {
         return {
-            allKayaks: ''
+            allKayaks: '',
+            searchTerm: '',
         }
     },
     mounted() {

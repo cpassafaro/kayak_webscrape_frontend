@@ -1,24 +1,26 @@
 <template>
   <v-layout class="rounded rounded-md">
     <v-app-bar color="surface-variant" title="WhiteWater Kayak Deals"></v-app-bar>
-    <v-row>
-      <v-carousel 
-        cycle
-        height="400"
-        hide-delimiters
-        :show-arrows="false"
-      >
-        <v-carousel-item
-          v-for="(item,i) in whitewaterImages"
-          :key="i"
-          :src="item.url"
-          cover
-        ></v-carousel-item>
-      </v-carousel>
-    </v-row>
-    <v-row>
-      <displayGrid></displayGrid>
-    </v-row>
+    <v-main>
+      <v-row>
+        <v-carousel 
+          cycle
+          height="400"
+          hide-delimiters
+          :show-arrows="false"
+        >
+          <v-carousel-item
+            v-for="(item,i) in whitewaterImages"
+            :key="i"
+            :src="item.url"
+            cover
+          ></v-carousel-item>
+        </v-carousel>
+      </v-row>
+      <v-row>
+        <displayGrid></displayGrid>
+      </v-row>
+    </v-main>
   </v-layout>
 </template>
 

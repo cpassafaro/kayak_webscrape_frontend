@@ -14,6 +14,9 @@ export default {
     return {
       kayak: {} 
     }
+  },
+  mounted() {
+    console.log('kayak card', this.value)
   }
 }
 </script>

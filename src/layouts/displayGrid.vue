@@ -3,8 +3,8 @@
         <SearchArea @search="onUpdateSearchTerm"></SearchArea>
         <v-container>
             <v-row align="center">
-                <v-col cols="4" class="pa-0 ma-0" v-for="(element, index) in allKayaks" :key="index">
-                    <KayakCard :value="allKayaks[index]"></KayakCard>
+                <v-col cols="4" class="pa-0 ma-0" v-for="(element, index) in filteredKayaks" :key="index">
+                    <KayakCard :value="filteredKayaks[index]"></KayakCard>
                 </v-col>
             </v-row>
         </v-container>
@@ -16,6 +16,7 @@ import Kayak from '../models/Kayak'
 import KayakCard from '../components/KayakCard.vue'
 import SearchArea from '../components/SearchArea.vue'
 import _ from 'lodash'
+
 export default {
     name: 'DisplayGrid',
     components: { SearchArea, KayakCard },
@@ -39,25 +40,47 @@ export default {
     },
     data() {
         return {
-            allKayaks: '',
+            allKayaks: [],
             searchTerm: '',
-            filteredContent: '',
+            filteredKayaks: [],
+            updateKey: 0
         }
     },
     mounted() {
         this.getAllKayaks()
     },
     methods: {
-        // filterBySearchTerm(searchTerm) {
-        //     console.log(searchTerm)
-        //     console.log(this.filteredContent)
-        //     // this.filteredContent.forEach(element => {
-        //     //     console.log(element)
-        //     // })
-        // },
+        filterBySearchTerm(searchTerm) {
+            console.log('filter by search starts!!!!')
+            if(searchTerm === ''){
+                this.filteredKayaks = this.allKayaks
+                // this.updateKey = this.updateKey + 1
+            } else {
+                this.filteredKayaks = this.allKayaks.filter(kayak => {
+                    console.log(kayak.title.toLowerCase())
+                    console.log(kayak.title.toLowerCase().includes(searchTerm))
+                    return kayak.title.toLowerCase().includes(searchTerm)
+                })
+                // this.updateKey = this.updateKey + 1
+                console.log('filtered kayaks ', this.filteredKayaks)
+            }
+            this.updateKey = this.updateKey + 1
+            console.log('filtered all kayaks ', this.filteredKayaks)
+        },
         async getAllKayaks() {
-            this.allKayaks = await Kayak.get()
-            console.log('all kayaks', this.allKayaks)
+            const kayakHolder = await Kayak.get()
+            kayakHolder.forEach((element) => {
+                // console.log(typeof element)
+                for (const boat in element) {
+                    // console.log(element[boat])
+                    this.allKayaks.push(element[boat])
+                    this.filteredKayaks.push(element[boat])
+                }
+                // element.forEach((boat) => {
+                //     console.log(boat)
+                // })
+            })
+            console.log(typeof this.allKayaks)
         },
         onUpdateSearchTerm(word) {
             // console.log('on update search term ', word)

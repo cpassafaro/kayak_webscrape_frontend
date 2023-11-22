@@ -21,17 +21,7 @@ export default {
     name: 'DisplayGrid',
     components: { SearchArea, KayakCard },
     props: {},
-    computed: {
-        // filteredContent() {
-        //     if(this.searchTerm) {
-        //         console.log('search ', this.searchTerm)
-        //         return []
-        //     } else {
-        //         console.log('not searching ', this.allKayaks)
-        //         return this.allKayaks
-        //     }
-        // },  
-    },
+    computed: {},
     watch: {
         searchTerm(newValue) {
             console.log('search term ', newValue)
@@ -69,6 +59,7 @@ export default {
         },
         async getAllKayaks() {
             const kayakHolder = await Kayak.get()
+            console.log(kayakHolder)
             kayakHolder.forEach((element) => {
                 // console.log(typeof element)
                 for (const boat in element) {
@@ -80,7 +71,7 @@ export default {
                 //     console.log(boat)
                 // })
             })
-            console.log(typeof this.allKayaks)
+            console.log(this.allKayaks)
         },
         onUpdateSearchTerm(word) {
             // console.log('on update search term ', word)

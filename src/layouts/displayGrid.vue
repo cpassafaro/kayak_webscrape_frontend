@@ -24,7 +24,6 @@ export default {
     computed: {},
     watch: {
         searchTerm(newValue) {
-            console.log('search term ', newValue)
             this.filterBySearchTerm(newValue)
         },
     },
@@ -33,7 +32,6 @@ export default {
             allKayaks: [],
             searchTerm: '',
             filteredKayaks: [],
-            updateKey: 0
         }
     },
     mounted() {
@@ -41,40 +39,33 @@ export default {
     },
     methods: {
         filterBySearchTerm(searchTerm) {
-            console.log('filter by search starts!!!!')
             if(searchTerm === ''){
                 this.filteredKayaks = this.allKayaks
-                // this.updateKey = this.updateKey + 1
             } else {
                 this.filteredKayaks = this.allKayaks.filter(kayak => {
                     console.log(kayak.title.toLowerCase())
                     console.log(kayak.title.toLowerCase().includes(searchTerm))
                     return kayak.title.toLowerCase().includes(searchTerm)
                 })
-                // this.updateKey = this.updateKey + 1
-                console.log('filtered kayaks ', this.filteredKayaks)
             }
-            this.updateKey = this.updateKey + 1
-            console.log('filtered all kayaks ', this.filteredKayaks)
         },
         async getAllKayaks() {
             const kayakHolder = await Kayak.get()
-            console.log(kayakHolder)
             kayakHolder.forEach((element) => {
-                // console.log(typeof element)
                 for (const boat in element) {
+                    // for colorado kayak replace {width} with an actual width
                     // console.log(element[boat])
+                    if(element[boat].website === 'Colorado Kayak') {
+                        element[boat].image = element[boat].image.replace('{width}', '200')
+                        element[boat].image = element[boat].image.slice(0, element[boat].image.indexOf('?'))
+                        console.log(element[boat].image)
+                    }
                     this.allKayaks.push(element[boat])
                     this.filteredKayaks.push(element[boat])
                 }
-                // element.forEach((boat) => {
-                //     console.log(boat)
-                // })
             })
-            console.log(this.allKayaks)
         },
         onUpdateSearchTerm(word) {
-            // console.log('on update search term ', word)
             this.searchTerm = word
         }
     }

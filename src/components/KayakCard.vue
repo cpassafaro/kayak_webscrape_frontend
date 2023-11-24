@@ -2,9 +2,10 @@
   <v-card class="ma-2 pa-3 elevation-0 container-card" variant="outlined">
     <v-card-title>{{ value.title }}</v-card-title>
     <v-card-subtitle>{{ value.website }}</v-card-subtitle>
-    <v-row>
+    <v-row :style="{'height': '240px'}">
       <v-col>
-        <v-img :src="imgSource" ></v-img>
+        <v-img :src="imgSource" :alt="value.title"></v-img>
+        <!-- <img :src="imgSource" alt="test"> -->
       </v-col>
     </v-row>
     <v-card-text>
@@ -28,14 +29,19 @@ export default {
     }
   },
   mounted() {
-    console.log('kayak card', this.value)
     // console.log(this.value.title.toLowerCase().includes('ripper'))
-    if(this.value.title.toLowerCase().includes('ripper')) {
-      this.imgSource = 'https://www.pyranha.com/images/products/ripper/ripper_rr_ts@2x.jpg'
-    } else if (this.value.title.toLowerCase().includes('remix') || this.value.title.toLowerCase().includes('rmx')) {
-      this.imgSource = 'https://liquidlogickayaks.com/cdn/shop/products/Remix_69_Bluegrass.jpg?v=1639577342'
-    } else if (this.value.title.toLowerCase().includes('mixmaster')) {
-      this.imgSource = 'https://www.backcountry.com/images/items/large/JAK/JAK0053/RD.jpg'
+    if(this.value.image) {
+      // console.log(this.value.image)
+      this.imgSource = this.value.image
+    } else {
+      if(this.value.title.toLowerCase().includes('ripper')) {
+        this.imgSource = 'https://www.pyranha.com/images/products/ripper/ripper_rr_ts@2x.jpg'
+      } else if (this.value.title.toLowerCase().includes('remix') || this.value.title.toLowerCase().includes('rmx')) {
+        this.imgSource = 'https://liquidlogickayaks.com/cdn/shop/products/Remix_69_Bluegrass.jpg?v=1639577342'
+      } else if (this.value.title.toLowerCase().includes('mixmaster')) {
+        this.imgSource = 'https://www.backcountry.com/images/items/large/JAK/JAK0053/RD.jpg'
+      }
+
     }
   }
 }

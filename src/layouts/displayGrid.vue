@@ -55,7 +55,7 @@ export default {
                 for (const boat in element) {
                     // for colorado kayak replace {width} with an actual width
                     // console.log(element[boat])
-                    if(element[boat].website === 'Colorado Kayak') {
+                    if(element[boat].website === 'Colorado Kayak' || element[boat].website === 'Rutabaga Shop') {
                         element[boat].image = element[boat].image.replace('{width}', '200')
                         element[boat].image = element[boat].image.slice(0, element[boat].image.indexOf('?'))
                         console.log(element[boat].image)

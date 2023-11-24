@@ -43,22 +43,26 @@ export default {
                 this.filteredKayaks = this.allKayaks
             } else {
                 this.filteredKayaks = this.allKayaks.filter(kayak => {
-                    console.log(kayak.title.toLowerCase())
-                    console.log(kayak.title.toLowerCase().includes(searchTerm))
                     return kayak.title.toLowerCase().includes(searchTerm)
                 })
             }
+            console.log(this.filteredKayaks)
         },
         async getAllKayaks() {
             const kayakHolder = await Kayak.get()
             kayakHolder.forEach((element) => {
                 for (const boat in element) {
-                    // for colorado kayak replace {width} with an actual width
-                    // console.log(element[boat])
-                    if(element[boat].website === 'Colorado Kayak' || element[boat].website === 'Rutabaga Shop') {
+                    if(element[boat].website === 'Colorado Kayak') {
                         element[boat].image = element[boat].image.replace('{width}', '200')
                         element[boat].image = element[boat].image.slice(0, element[boat].image.indexOf('?'))
-                        console.log(element[boat].image)
+                        console.log(element[boat])
+                        element[boat].price = '$' + element[boat].price
+                    } else if (element[boat].website === 'Rutabaga Shop') {
+                        element[boat].image = element[boat].image.replace('{width}', '200')
+                        element[boat].image = element[boat].image.slice(0, element[boat].image.indexOf('?'))
+                        element[boat].price = '$' + element[boat].price
+                    } else if (element[boat].website === 'Next Adventure') {
+                        element[boat].price = element[boat].price.slice(0, element[boat].price.indexOf('.'))
                     }
                     this.allKayaks.push(element[boat])
                     this.filteredKayaks.push(element[boat])

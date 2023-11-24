@@ -1,17 +1,26 @@
 <template>
   <v-card class="ma-2 pa-3 elevation-0 container-card" variant="outlined">
-    <v-card-title>{{ value.title }}</v-card-title>
-    <v-card-subtitle>{{ value.website }}</v-card-subtitle>
-    <v-row :style="{'height': '240px'}">
+    <v-row class="d-flex justify-center align-center" :style="{'height': '240px'}">
       <v-col>
         <v-img :src="imgSource" :alt="value.title"></v-img>
-        <!-- <img :src="imgSource" alt="test"> -->
       </v-col>
     </v-row>
-    <v-card-text>
-    </v-card-text>
-    <v-card-actions>
-      <v-btn prepend-icon="mdi-link" variant="tonal" class="pa-2 btn-href"><a :href="value.link" target="_blank">Click to go to site</a></v-btn>
+    <v-row class="mt-6">
+      <v-col cols="12" class="pa-0">
+        <v-card-title>
+          <span class="text-truncate">
+          {{ value.title }}
+        </span>
+        </v-card-title>
+        <v-card-subtitle>{{ value.website }}</v-card-subtitle>
+        <v-divider class="mx-4 mb-1"></v-divider>
+        <v-card-text>
+          <span>Price: </span><span>{{ value.price }}</span>
+        </v-card-text>
+      </v-col>
+    </v-row>
+    <v-card-actions class="d-flex justify-center align-center">
+      <v-btn prepend-icon="mdi-link" class="pa-5 d-flex justify-center align-center btn-href"><a :href="value.link" target="_blank" class="d-flex justify-center align-center">Click to go to site</a></v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -29,19 +38,9 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.value.title.toLowerCase().includes('ripper'))
+    // console.log(this.value)
     if(this.value.image) {
-      // console.log(this.value.image)
       this.imgSource = this.value.image
-    } else {
-      if(this.value.title.toLowerCase().includes('ripper')) {
-        this.imgSource = 'https://www.pyranha.com/images/products/ripper/ripper_rr_ts@2x.jpg'
-      } else if (this.value.title.toLowerCase().includes('remix') || this.value.title.toLowerCase().includes('rmx')) {
-        this.imgSource = 'https://liquidlogickayaks.com/cdn/shop/products/Remix_69_Bluegrass.jpg?v=1639577342'
-      } else if (this.value.title.toLowerCase().includes('mixmaster')) {
-        this.imgSource = 'https://www.backcountry.com/images/items/large/JAK/JAK0053/RD.jpg'
-      }
-
     }
   }
 }
@@ -52,8 +51,12 @@ export default {
   /* height: 30px; */
   min-height: 400px;
 }
+a {
+  color: white;
+  text-decoration: none;
+}
 .btn-href {
-  /* background-color: black; */
+  background-color: black;
   color: white;
 }
 </style>

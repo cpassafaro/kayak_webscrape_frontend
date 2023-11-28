@@ -29,7 +29,7 @@
   </script>
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
-  .search {
+  /* .search {
     margin-top:-55px;
-  }
+  } */
   </style>

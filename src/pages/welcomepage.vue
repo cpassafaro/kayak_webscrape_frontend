@@ -1,8 +1,8 @@
 <template>
   <v-layout class="rounded rounded-md">
     <v-app-bar color="surface-variant" title="WhiteWater Kayak Deals"></v-app-bar>
-    <v-main>
-      <v-row>
+    <v-main class="container-main">
+      <!-- <v-row>
         <v-carousel 
           cycle
           height="400"
@@ -16,7 +16,7 @@
             cover
           ></v-carousel-item>
         </v-carousel>
-      </v-row>
+      </v-row> -->
       <v-row>
         <displayGrid></displayGrid>
       </v-row>
@@ -47,3 +47,8 @@ export default {
   },
 };
 </script>
+<style>
+.container-main{
+  background-color: #5F9EA0;
+}
+</style>

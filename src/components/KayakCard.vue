@@ -1,8 +1,8 @@
 <template>
   <v-card class="ma-2 pa-3 elevation-0 container-card" variant="outlined">
-    <v-row class="d-flex justify-center align-center" :style="{'height': '240px'}">
-      <v-col>
-        <v-img :src="imgSource" :alt="value.title"></v-img>
+    <v-row class="d-flex justify-center align-center">
+      <v-col :style="{'height': '240px'}" class="d-flex justify-center align-center">
+        <img :src="imgSource" :alt="value.title" class="image-kayak"/>
       </v-col>
     </v-row>
     <v-row class="mt-6">
@@ -38,7 +38,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.value)
     if(this.value.image) {
       this.imgSource = this.value.image
     }
@@ -48,8 +47,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container-card {
-  /* height: 30px; */
   min-height: 400px;
+  background-color: white;
+  border: 2px solid black;
 }
 a {
   color: white;
@@ -58,5 +58,8 @@ a {
 .btn-href {
   background-color: black;
   color: white;
+}
+.image-kayak {
+  object-fit: contain;
 }
 </style>

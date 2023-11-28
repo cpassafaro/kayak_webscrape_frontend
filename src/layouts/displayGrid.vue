@@ -4,7 +4,7 @@
         <v-container>
             <v-row align="center">
                 <v-col cols="4" class="pa-0 ma-0" v-for="(element, index) in filteredKayaks" :key="index">
-                    <KayakCard :value="filteredKayaks[index]"></KayakCard>
+                    <KayakCard :key="updateKey" :value="filteredKayaks[index]"></KayakCard>
                 </v-col>
             </v-row>
         </v-container>
@@ -32,6 +32,7 @@ export default {
             allKayaks: [],
             searchTerm: '',
             filteredKayaks: [],
+            updateKey: 0
         }
     },
     mounted() {
@@ -41,12 +42,13 @@ export default {
         filterBySearchTerm(searchTerm) {
             if(searchTerm === ''){
                 this.filteredKayaks = this.allKayaks
+                this.updateKey = this.updateKey + 1
             } else {
                 this.filteredKayaks = this.allKayaks.filter(kayak => {
                     return kayak.title.toLowerCase().includes(searchTerm)
                 })
+                this.updateKey = this.updateKey + 1
             }
-            console.log(this.filteredKayaks)
         },
         async getAllKayaks() {
             const kayakHolder = await Kayak.get()

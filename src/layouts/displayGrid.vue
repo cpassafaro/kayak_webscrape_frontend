@@ -2,11 +2,19 @@
     <v-container>
         <SearchArea @search="onUpdateSearchTerm"></SearchArea>
         <v-container>
-            <v-row align="center">
+            <v-row align="center" v-if="filteredKayaks">
                 <v-col cols="4" class="pa-0 ma-0" v-for="(element, index) in filteredKayaks" :key="index">
                     <KayakCard :key="updateKey" :value="filteredKayaks[index]"></KayakCard>
                 </v-col>
             </v-row>
+        </v-container>
+        <v-container class="d-flex justify-center align-center">
+            <v-progress-circular
+                v-if="loading"
+                :size="100"
+                indeterminate
+                color="primary"
+            ></v-progress-circular>
         </v-container>
     </v-container>
 </template>
@@ -32,7 +40,11 @@ export default {
             allKayaks: [],
             searchTerm: '',
             filteredKayaks: [],
-            updateKey: 0
+            updateKey: 0,
+            coloradoKayak: [],
+            rutubagaKayak: [],
+            nextAdventureKayak: [],
+            loading: true
         }
     },
     mounted() {
@@ -51,13 +63,16 @@ export default {
             }
         },
         async getAllKayaks() {
+            this.coloradoKayak = await Kayak.custom('company/colorado-kayak').get()
+            this.rutubagaKayak = await Kayak.custom('company/rutabaga-shop').get()
+            this.nextAdventureKayak = await Kayak.custom('company/next-adventure').get()
             const kayakHolder = await Kayak.get()
+
             kayakHolder.forEach((element) => {
                 for (const boat in element) {
                     if(element[boat].website === 'Colorado Kayak') {
                         element[boat].image = element[boat].image.replace('{width}', '200')
                         element[boat].image = element[boat].image.slice(0, element[boat].image.indexOf('?'))
-                        console.log(element[boat])
                         element[boat].price = '$' + element[boat].price
                     } else if (element[boat].website === 'Rutabaga Shop') {
                         element[boat].image = element[boat].image.replace('{width}', '200')
@@ -70,6 +85,7 @@ export default {
                     this.filteredKayaks.push(element[boat])
                 }
             })
+            this.loading = false
         },
         onUpdateSearchTerm(word) {
             this.searchTerm = word
